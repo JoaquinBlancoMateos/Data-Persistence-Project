@@ -9,32 +9,41 @@ using UnityEngine.UI;
 [System.Serializable]
 class Data
 {
-    public Text namePj;
+    public string namePj;
     public int maxScore;
 
 }
 public class PanelsManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text namePj;
+    public InputField enter;
+    public string namePj;
     public static PanelsManager THIS;
     public int maxScore;
-
-
+     
+    
 
     private void Awake()
     {
         THIS = this;
+        LoadData();
     }
     public void LoadScene(int n)
     {
         SceneManager.LoadScene(n);
+        SaveData();
+    }
+    public void Exit()
+    {
 
+        PanelsManager.THIS.SaveData();
+        Application.Quit();
     }
 
     public void SaveData()
     {
         Data data = new Data();
+         namePj=enter.text;
         data.namePj = namePj;
         data.maxScore = maxScore;
 
